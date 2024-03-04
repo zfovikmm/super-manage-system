@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "vxe-table": "^4.5.21-beta.1",
+    "xe-utils": "^3.5.20"
+  }
+}
