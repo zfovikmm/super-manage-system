@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import com.example.entity.CommonResp;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.slf4j.Logger;
@@ -20,9 +21,18 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public boolean login(@RequestBody User req){
-        LOG.info(req.getUsername()+" "+req.getPassword());
-        return userService.login(req);
+    public CommonResp login(@RequestBody User req){
+        CommonResp<User> resp = new CommonResp<>();
+        resp.setData(userService.login(req));
+        resp.setCode(0);
+        return resp;
     }
 
+    @GetMapping("/info")
+    public CommonResp getInfo(){
+        CommonResp<User> resp = new CommonResp<>();
+        resp.setData(userService.getInfo());
+        resp.setCode(0);
+        return resp;
+    }
 }

@@ -16,16 +16,22 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
-    public boolean login(User req){
-        System.out.println(req);
+    public User login(User req){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("username",req.getUsername());
         User user = userMapper.selectOne(queryWrapper);
         LOG.info(String.valueOf(user));
         if(!ObjectUtils.isNull(user) && user.getPassword().equals(req.getPassword())){
-            return true;
+            return user;
         }else {
-            return false;
+            return null;
         }
+    }
+
+    public User getInfo(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("username","admin");
+        User user = userMapper.selectOne(queryWrapper);
+        return user;
     }
 }
