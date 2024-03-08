@@ -4,12 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.example.controller.UserController;
 import com.example.entity.User;
+import com.example.exception.BusinessException;
+import com.example.exception.BusinessExceptionCode;
 import com.example.mapper.UserMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Service
 public class UserService {
@@ -20,11 +25,11 @@ public class UserService {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("username",req.getUsername());
         User user = userMapper.selectOne(queryWrapper);
-        LOG.info(String.valueOf(user));
+
         if(!ObjectUtils.isNull(user) && user.getPassword().equals(req.getPassword())){
             return user;
         }else {
-            return null;
+            throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
         }
     }
 

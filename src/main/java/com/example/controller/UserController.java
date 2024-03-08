@@ -2,6 +2,7 @@ package com.example.controller;
 
 
 import com.example.entity.CommonResp;
+
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -21,10 +23,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public CommonResp login(@RequestBody User req){
+    public CommonResp login(@RequestBody User req, HttpSession session) throws Exception{
         CommonResp<User> resp = new CommonResp<>();
         resp.setData(userService.login(req));
-        resp.setCode(0);
+        session.setAttribute("username",req.getUsername());
         return resp;
     }
 
@@ -32,7 +34,6 @@ public class UserController {
     public CommonResp getInfo(){
         CommonResp<User> resp = new CommonResp<>();
         resp.setData(userService.getInfo());
-        resp.setCode(0);
         return resp;
     }
 }

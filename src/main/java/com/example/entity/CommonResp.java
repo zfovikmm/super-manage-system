@@ -10,7 +10,7 @@ public class CommonResp<T> {
     /**
      * 返回码
      */
-    private Integer code;
+    private Integer code = 0;
 
     /**
      * 返回信息
