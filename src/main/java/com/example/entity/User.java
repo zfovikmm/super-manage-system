@@ -9,9 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
 
-  private long id;
+  private long uId;
   private String username;
   private String password;
-  private String code;
+  private String phone;
   private String token;
+  private String avatarUrl;
+  private java.sql.Timestamp createdAt;
+  private java.sql.Timestamp updatedAt;
+
 }
