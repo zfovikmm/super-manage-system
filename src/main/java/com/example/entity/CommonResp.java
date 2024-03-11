@@ -13,6 +13,12 @@ public class CommonResp<T> {
     private Integer code = 0;
 
     /**
+     * token
+     */
+
+    private String token;
+
+    /**
      * 返回信息
      */
     private String message;
@@ -54,11 +60,21 @@ public class CommonResp<T> {
         this.data = data;
     }
 
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ResponseDto{");
         sb.append("success=").append(success);
         sb.append(",code=").append(code);
+        sb.append(".token=").append(token);
         sb.append(", message='").append(message).append('\'');
         sb.append(", data=").append(data);
         sb.append('}');

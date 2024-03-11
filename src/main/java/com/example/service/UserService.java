@@ -7,6 +7,7 @@ import com.example.entity.User;
 import com.example.exception.BusinessException;
 import com.example.exception.BusinessExceptionCode;
 import com.example.mapper.UserMapper;
+import com.example.utils.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,13 @@ public class UserService {
     private UserMapper userMapper;
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     public User login(User req){
+        String token = null;
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("username",req.getUsername());
         User user = userMapper.selectOne(queryWrapper);
 
         if(!ObjectUtils.isNull(user) && user.getPassword().equals(req.getPassword())){
+
             return user;
         }else {
             throw new BusinessException(BusinessExceptionCode.LOGIN_USER_ERROR);
