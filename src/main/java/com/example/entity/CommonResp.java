@@ -74,7 +74,7 @@ public class CommonResp<T> {
         final StringBuffer sb = new StringBuffer("ResponseDto{");
         sb.append("success=").append(success);
         sb.append(",code=").append(code);
-        sb.append(".token=").append(token);
+        sb.append(",token=").append(token);
         sb.append(", message='").append(message).append('\'');
         sb.append(", data=").append(data);
         sb.append('}');
